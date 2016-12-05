@@ -17,7 +17,8 @@ module.exports = {
           loaders: {
             sass: 'style-loader!css-loader!sass-loader?indentedSyntax',
             scss: 'style-loader!css-loader!sass-loader'
-          }
+          },
+          postcss: [require('autoprefixer')()]
         }
       },
       {
@@ -47,7 +48,7 @@ module.exports = {
       store: path.resolve(__dirname, 'src/store'),
       styles: path.resolve(__dirname, 'src/styles')
     },
-    extensions: ['.js', '.vue', '.scss']
+    extensions: ['.js', '.vue', '.scss', '.svg']
   },
   devServer: {
     historyApiFallback: true,
