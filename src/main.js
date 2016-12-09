@@ -8,12 +8,12 @@ import { routes } from './routes'
 Vue.use(VueRouter)
 const router = new VueRouter({
   routes,
-  mode: 'history' // Remember to set up the server to ALWAYS serve the index.html file when this history-mode is on (to avoid hashes in the url)
+  mode: 'history' // TODO: Remember to set up the server to ALWAYS serve the index.html file when this history-mode is on (to avoid hashes in the url)
 })
 
 new Vue({
   el: '#app',
-  store,
   router,
+  store,
   render: h => h(App)
 })

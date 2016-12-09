@@ -44,6 +44,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       assets: path.resolve(__dirname, 'src/assets'),
       components: path.resolve(__dirname, 'src/components'),
+      data: path.resolve(__dirname, 'src/data'),
       routes: path.resolve(__dirname, 'src/routes'),
       store: path.resolve(__dirname, 'src/store'),
       styles: path.resolve(__dirname, 'src/styles')

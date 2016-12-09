@@ -1,18 +1,17 @@
 <template>
-  <div class="folder" @click="click" :id="title">
+  <div class="folder">
     <div class="folder_icon">
       <div class="folder_icon_top"></div>
       <div class="folder_icon_bottom"></div>
     </div>
-    <p class="folder_title">{{ title }}</p>
+    <p class="folder_title">{{ client }}</p>
   </div>
 </template>
 
 <script>
   export default {
     props: {
-      title: { type: String, required: true },
-      click: { type: Function, required: true }
+      client: { type: String }
     }
   }
 </script>
@@ -20,6 +19,8 @@
 <style lang="scss" scoped>
 
   @import '~styles/vars';
+
+  $borderRadius-folder: 2px;
 
   .folder {
     position: absolute;
@@ -41,8 +42,8 @@
         left: 0;
         width: 22px;
         height: 5px;
-        border-top-left-radius: $borderRadius;
-        border-top-right-radius: $borderRadius;
+        border-top-left-radius: $borderRadius-folder;
+        border-top-right-radius: $borderRadius-folder;
         background: $color-brandLight-darker-1;
       }
 
@@ -52,9 +53,9 @@
         left: 0;
         width: 60px;
         height: 40px;
-        border-bottom-left-radius: $borderRadius;
-        border-bottom-right-radius: $borderRadius;
-        border-top-right-radius: $borderRadius;
+        border-bottom-left-radius: $borderRadius-folder;
+        border-bottom-right-radius: $borderRadius-folder;
+        border-top-right-radius: $borderRadius-folder;
         background: $color-brandLight;
       }
     }
