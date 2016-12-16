@@ -7,7 +7,7 @@
       </div>
     </router-link>
     <div class="folders">
-      <router-link v-for="(project, index) in projects" :to="{ path: '/projects/' + project.id }" class="folder_link">
+      <router-link v-for="(project, index) in projects" :to="{ name: 'finderStart', params: { projectId: project.id } }" class="folder_link">
         <folder :client="project.client" />
       </router-link>
     </div>

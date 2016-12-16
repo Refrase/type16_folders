@@ -1,11 +1,14 @@
 <template>
-  <li class="finder_folder">
+  <router-link
+    tag="li"
+    :to="{ name: 'finderWindow', params: { folder: folderName.toLowerCase() }}"
+    class="finder_folder">
     <div class="finder_folder_icon finder_folder_icon-folder">
       <div class="finder_folder_icon-folder_top"></div>
       <div class="finder_folder_icon-folder_bottom"></div>
     </div>
     <p>{{ folderName }}</p>
-  </li>
+  </router-link>
 </template>
 
 <script>
@@ -28,6 +31,7 @@
       padding: $scale 0 0 $scale;
       display: flex;
       align-items: center;
+      cursor: pointer;
 
       &:last-child { padding-bottom: $scale; }
 

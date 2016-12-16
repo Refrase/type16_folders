@@ -1,21 +1,19 @@
 <template>
   <div class="finder">
     <div class="finder_header">
-      <router-link to="/"><div class="finder_close"></div></router-Link>
+      <router-link :to="{ name: 'home' }">
+        <div class="finder_close"></div>
+      </router-Link>
       <p class="padding-1-4">{{ loading ? 'Loading...' : headerTitle }}</p>
     </div>
-    <ul class="finder_items">
-      <finder-folder
-        v-for="(folder, index) in projectFolders"
-        :folderName="folder" />
-    </ul>
+    <transition name="slideFinderWindow">
+      <router-view :projectFolders="projectFolders"></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-  import FinderFolder from 'components/Finder/Folder'
   export default {
-    components: { 'finder-folder': FinderFolder },
     props: {
       loading: { type: Boolean, default: false },
       headerTitle: { type: String, default: 'Project' },
@@ -34,7 +32,7 @@
     top: 2%;
     left: 2%;
     width: 50%;
-    min-height: 300px;
+    height: 300px;
     background: $color-brandLight;
     border-radius: $borderRadius;
     animation: fadeIn 200ms ease-out, pop 400ms $animationBezier;
@@ -62,6 +60,21 @@
         background: darken(#FD605C, 10%);
       }
     }
+  }
+
+  .slideFinderWindow-enter {}
+  .slideFinderWindow-enter-active { animation: slideIn 250ms $animationBezier forwards; }
+  .slideFinderWindow-leave {}
+  .slideFinderWindow-leave-active { animation: slideOut 250ms $animationBezier forwards; }
+
+  @keyframes slideIn {
+  	0% 		{ transform: translateX(20px); opacity: 0; }
+  	100% 	{ transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes slideOut {
+  	0% 		{ transform: translateX(0); opacity: 1; }
+  	100% 	{ transform: translateX(20px); opacity: 0; }
   }
 
 </style>
