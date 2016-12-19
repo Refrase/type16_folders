@@ -1,7 +1,7 @@
 <template>
   <router-link
     tag="li"
-    :to="{ name: 'finderWindow', params: { folder: folderName.toLowerCase() }}"
+    :to="{ name: 'finderWindow', params: { folderId: folderId }}"
     class="finder_folder">
     <div class="finder_folder_icon finder_folder_icon-folder">
       <div class="finder_folder_icon-folder_top"></div>
@@ -14,6 +14,7 @@
 <script>
   export default {
     props: {
+      folderId: { type: String, required: true },
       folderName: { type: String, required: true }
     }
   }

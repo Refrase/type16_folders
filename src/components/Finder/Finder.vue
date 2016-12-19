@@ -29,13 +29,12 @@
   .finder {
     position: relative;
     z-index: 1;
-    top: 2%;
-    left: 2%;
     width: 50%;
     height: 300px;
     background: $color-brandLight;
     border-radius: $borderRadius;
     animation: fadeIn 200ms ease-out, pop 400ms $animationBezier;
+    overflow: hidden;
 
     &_header {
       border-top-left-radius: $borderRadius;
@@ -65,16 +64,16 @@
   .slideFinderWindow-enter {}
   .slideFinderWindow-enter-active { animation: slideIn 250ms $animationBezier forwards; }
   .slideFinderWindow-leave {}
-  .slideFinderWindow-leave-active { animation: slideOut 250ms $animationBezier forwards; }
+  .slideFinderWindow-leave-active { animation: fadeOut 150ms $animationBezier forwards; }
 
   @keyframes slideIn {
-  	0% 		{ transform: translateX(20px); opacity: 0; }
-  	100% 	{ transform: translateX(0); opacity: 1; }
+  	0% 		{ transform: translateX(200px); opacity: 0; }
+  	100% 	{ transform: translateX(0px); opacity: 1; }
   }
 
-  @keyframes slideOut {
-  	0% 		{ transform: translateX(0); opacity: 1; }
-  	100% 	{ transform: translateX(20px); opacity: 0; }
+  @keyframes fadeOut {
+  	0% 		{ opacity: 1; }
+  	100% 	{ opacity: 0; }
   }
 
 </style>

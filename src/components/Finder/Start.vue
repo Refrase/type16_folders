@@ -2,8 +2,9 @@
   <div class="finderStart">
     <ul>
       <finder-folder
-        v-for="(folder, index) in projectFolders"
-        :folderName="folder" />
+        v-for="folder in projectFolders"
+        :folderId="folder.id"
+        :folderName="folder.name" />
     </ul>
   </div>
 </template>
