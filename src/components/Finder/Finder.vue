@@ -46,7 +46,6 @@
         } else {
           this.backActive = false
         }
-        console.log(this.backActive);
       }
     }
   }

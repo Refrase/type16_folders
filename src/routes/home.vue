@@ -11,13 +11,18 @@
         <folder :client="project.client" />
       </router-link>
     </div>
+    <dock />
   </div>
 </template>
 
 <script>
   import Folder from 'components/Folder'
+  import Dock from 'components/Dock/Dock'
   export default {
-    components: { folder: Folder },
+    components: {
+      folder: Folder,
+      dock: Dock
+    },
     computed: {
       projects() {
         return this.$store.getters.projects
