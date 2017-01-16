@@ -3,13 +3,15 @@
     <router-link :to="{ name: 'finderWindow', params: { folderId: 'all' } }">
       <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="18">
     </router-link>
-    <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="20">
+    <router-link :to="{ name: 'mail' }">
+      <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="20">
+    </router-link>
     <img src="~assets/notes.svg" alt="Icon: Notes" class="dock_icon dock_icon-notes" width="20">
   </div>
 </template>
 
 <script>
-  export default { name: "dock" }
+  export default { name: 'dock' }
 </script>
 
 <style lang="scss" scoped>
