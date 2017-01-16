@@ -1,24 +1,25 @@
 <template>
   <div class="itemViewer">
-    <div class="itemViewer_header">
-      <router-link
-        tag="div"
-        :to="{
-          name: 'finderWindow',
-          params: { folderId: item.idParentFolder }
-        }"
-        class="itemViewer_close"></router-link>
-      <p class="padding-1-4">{{ item.label }}</p>
-    </div>
+
+    <finder-header
+      :title="item.label"
+      linkName="finderWindow"
+      :linkParams="{ folderId: item.idParentFolder }" />
+
     <div class="itemViewer_content">
       <img v-for="(url, index) in item.urls" :src="url" width="100%" />
     </div>
+
   </div>
 </template>
 
 <script>
+  import FinderHeader from 'components/Finder/Header'
   export default {
     name: "item-viewer",
+    components: {
+      'finder-header': FinderHeader
+    },
     computed: {
       item() { return this.$store.getters.itemActive }
     },
@@ -53,30 +54,6 @@
     @include breakpoint('desktop') {
       top: -20%;
       height: 120%;
-    }
-
-    &_header {
-      border-top-left-radius: $borderRadius;
-      border-top-right-radius: $borderRadius;
-      width: 100%;
-      background: $color-brandLight-darker-1;
-      text-align: center;
-    }
-
-    &_close {
-      position: absolute;
-      left: 8px;
-      top: 7px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #FD605C;
-      border: 1px solid darken(#FD605C, 10%);
-      cursor: default;
-
-      &:hover {
-        background: darken(#FD605C, 10%);
-      }
     }
 
     &_content {
