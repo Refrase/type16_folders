@@ -1,6 +1,6 @@
 export default [
   {
-    id: 'documents',
+    id: 'all',
     label: 'Documents',
     folders: [
       {

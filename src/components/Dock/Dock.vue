@@ -1,6 +1,6 @@
 <template>
   <div class="dock">
-    <router-link :to="{ name: 'finderWindow', params: { folderId: 'documents' } }">
+    <router-link :to="{ name: 'finderWindow', params: { folderId: 'all' } }">
       <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="30">
     </router-link>
     <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="30">

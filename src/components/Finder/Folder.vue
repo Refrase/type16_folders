@@ -5,7 +5,7 @@
       name: 'finderWindow',
       params: {
         folderId: folder.id,
-        folderParentId: folder.idParentFolder && folder.idParentFolder !== 'documents' ? folder.idParentFolder : null
+        folderParentId: folder.idParentFolder && folder.idParentFolder !== 'all' ? folder.idParentFolder : null
       }
     }"
     class="finder_folder">
