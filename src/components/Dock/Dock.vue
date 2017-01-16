@@ -1,10 +1,10 @@
 <template>
   <div class="dock">
     <router-link :to="{ name: 'finderWindow', params: { folderId: 'all' } }">
-      <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="30">
+      <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="18">
     </router-link>
-    <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="30">
-    <img src="~assets/notes.svg" alt="Icon: Notes" class="dock_icon dock_icon-notes" width="30">
+    <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="20">
+    <img src="~assets/notes.svg" alt="Icon: Notes" class="dock_icon dock_icon-notes" width="20">
   </div>
 </template>
 
@@ -18,26 +18,29 @@
 
   .dock {
     position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    padding: $scale;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: $scale-1-2;
     background: $color-brandLight;
-    border-top-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
     border-top-right-radius: $borderRadius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     &_icon {
       cursor: pointer;
       transition: transform 150ms ease-out;
 
       &:not(:last-child) {
-        margin-right: $scale-1-2;
+        margin-bottom: $scale-1-2;
       }
 
       &:hover { transform: scale(1.2); }
 
       &-finder { margin: $scale-1-4; }
-      &-mail { width: 34px; }
+      &-mail { width: 23px; }
     }
   }
 

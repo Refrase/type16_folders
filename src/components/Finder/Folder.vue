@@ -29,8 +29,8 @@
 <style lang="scss" scoped>
 
   @import '~styles/vars';
-  $iconWidth: 18px;
 
+  $iconWidth: 18px;
   $borderRadius-finderFolder: 1px;
 
   .finder {
