@@ -1,15 +1,15 @@
 <template>
   <div class="dock">
-    <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="30">
+    <router-link :to="{ name: 'finderWindow', params: { folderId: 'documents' } }">
+      <img src="~assets/finder.svg" alt="Icon: Finder" class="dock_icon dock_icon-finder" width="30">
+    </router-link>
     <img src="~assets/mail.png" alt="Icon: Mail" class="dock_icon dock_icon-mail" width="30">
     <img src="~assets/notes.svg" alt="Icon: Notes" class="dock_icon dock_icon-notes" width="30">
   </div>
 </template>
 
 <script>
-  export default {
-
-  }
+  export default { name: "dock" }
 </script>
 
 <style lang="scss" scoped>

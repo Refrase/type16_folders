@@ -1,18 +1,21 @@
 <template>
   <router-link
     tag="li"
-    :to="{ name: 'itemViewer', params: { itemId: itemId }}"
+    :to="{
+      name: 'itemViewer',
+      params: { itemId: item.id }
+    }"
     class="finder_item">
     <div class="finder_item_icon"></div>
-    <p>{{ itemName }}</p>
+    <p>{{ item.label }}</p>
   </router-link>
 </template>
 
 <script>
   export default {
+    name: "finder-item",
     props: {
-      itemId: { type: String, required: true },
-      itemName: { type: String, required: true }
+      item: { type: Object }
     }
   }
 </script>
@@ -20,8 +23,8 @@
 <style lang="scss" scoped>
 
   @import '~styles/vars';
-  $iconWidth: 18px;
 
+  $iconWidth: 18px;
   $borderRadius-finderFolder: 1px;
 
   .finder {
@@ -37,9 +40,10 @@
         margin-right: $scale-1-2;
         width: 18px;
         height: 14px;
-        background: $color-brandDark-lighter-2;
+        margin-top: -2px;
+        border: 1px solid $color-brandDark-lighter-2;
         border-radius: $borderRadius-finderFolder;
-        border-top-left-radius: 0; 
+        border-top-left-radius: 0;
       }
     }
   }

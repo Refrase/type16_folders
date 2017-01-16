@@ -1,21 +1,27 @@
 <template>
   <router-link
     tag="li"
-    :to="{ name: 'finderWindow', params: { folderId: folderId }}"
+    :to="{
+      name: 'finderWindow',
+      params: {
+        folderId: folder.id,
+        folderParentId: folder.idParentFolder && folder.idParentFolder !== 'documents' ? folder.idParentFolder : null
+      }
+    }"
     class="finder_folder">
     <div class="finder_folder_icon finder_folder_icon-folder">
       <div class="finder_folder_icon-folder_top"></div>
       <div class="finder_folder_icon-folder_bottom"></div>
     </div>
-    <p>{{ folderName }}</p>
+    <p>{{ folder.label }}</p>
   </router-link>
 </template>
 
 <script>
   export default {
+    name: "finder-folder",
     props: {
-      folderId: { type: String, required: true },
-      folderName: { type: String, required: true }
+      folder: { type: Object }
     }
   }
 </script>

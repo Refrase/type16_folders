@@ -1,52 +1,35 @@
 <template>
   <div class="itemViewer">
     <div class="itemViewer_header">
-      <div class="itemViewer_close" @click="goBack"></div>
-      <p class="padding-1-4">{{ headerTitle }}</p>
+      <router-link
+        tag="div"
+        :to="{
+          name: 'finderWindow',
+          params: { folderId: item.idParentFolder }
+        }"
+        class="itemViewer_close"></router-link>
+      <p class="padding-1-4">{{ item.label }}</p>
     </div>
     <div class="itemViewer_content">
-      <img :src="item" width="100%" />
+      <img v-for="(url, index) in item.urls" :src="url" width="100%" />
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: {
-      projectFolders: { type: Array }
+    name: "item-viewer",
+    computed: {
+      item() { return this.$store.getters.itemActive }
     },
-    data() {
-      return {
-        headerTitle: this.$route.params.itemId,
-        item: null
-      }
-    },
-    created () {
-      this.setItem()
+    created() {
+      this.setDocumentsSubset()
+      this.setItemActive()
     },
     methods: {
-      setItem() {
-        const activeFolderId = this.$route.params.folderId
-        const folders = this.projectFolders
-        let folderItems = []
-        const activeItemId = this.$route.params.itemId
-        // Loop through folders and find the one matching the active folder (fetched through the url param)
-        for ( var i = 0; i < folders.length; i++ ) {
-          if ( folders[i].id === activeFolderId ) {
-            folderItems = folders[i].items
-            // Loop through items in the active folder and find the one matching the active item (fetched through the url param)
-            for ( var i = 0; i < folderItems.length; i++ ) {
-              if ( folderItems[i].id === activeItemId ) {
-                this.item = folderItems[i].url
-                this.headerTitle = folderItems[i].name
-              }
-            }
-          }
-        }
-      },
-      goBack() {
-        this.$router.go(-1)
-      }
+      setDocumentsSubset() { this.$store.commit('SET_DOCUMENTS_SUBSET', this.$route.params.folderId) },
+      setItemActive() { this.$store.commit('SET_ITEM_ACTIVE', this.$route.params.itemId) },
+      goBack() { this.$router.go(-1) }
     }
   }
 </script>
@@ -54,17 +37,23 @@
 <style lang="scss" scoped>
 
   @import '~styles/vars';
+  @import '~styles/breakpoints';
 
   .itemViewer {
-    position: relative;
+    position: absolute;
     z-index: 1;
-    width: 80%;
-    height: 80%;
-    align-self: flex-start;
+    width: 140%;
+    height: 160%;
+    top: -40%;
+    left: -20%;
     background: $color-brandLight;
     border-radius: $borderRadius;
-    margin-top: $scale-2-1;
     animation: fadeIn 200ms ease-out, pop 400ms $animationBezier;
+
+    @include breakpoint('desktop') {
+      top: -20%;
+      height: 120%;
+    }
 
     &_header {
       border-top-left-radius: $borderRadius;

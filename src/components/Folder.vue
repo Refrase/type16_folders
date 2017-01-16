@@ -4,14 +4,15 @@
       <div class="folder_icon_top"></div>
       <div class="folder_icon_bottom"></div>
     </div>
-    <p class="folder_title">{{ client }}</p>
+    <p class="folder_title">{{ label }}</p>
   </div>
 </template>
 
 <script>
   export default {
+    name: "folder",
     props: {
-      client: { type: String }
+      label: { type: String }
     }
   }
 </script>

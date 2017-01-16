@@ -1,51 +1,59 @@
 <template>
-  <div class="finder">
-    <div class="finder_header">
-      <div class="finder_header_actions">
-        <router-link :to="{ name: 'home' }">
-          <div class="finder_header_actions_close"></div>
-        </router-Link>
-        <div class="finder_header_actions_back" v-if="backActive" @click="goBack">
-          <div class="finder_header_actions_back_arrow"></div>
-          <div class="finder_header_actions_back_arrowCover"></div>
+  <div class="finderRoute">
+
+    <div class="finder">
+
+      <div class="finder_header">
+        <div class="finder_header_actions">
+          <router-link :to="{ name: 'home' }">
+            <div class="finder_header_actions_close"></div>
+          </router-Link>
+          <div class="finder_header_actions_back" v-if="backActive" @click="goBack">
+            <div class="finder_header_actions_back_arrow"></div>
+            <div class="finder_header_actions_back_arrowCover"></div>
+          </div>
         </div>
+        <p class="padding-1-4">{{ documentsSubset.label }}</p>
       </div>
-      <p class="padding-1-4">{{ loading ? 'Loading...' : headerTitle }}</p>
+
+      <transition name="slideFinderWindow">
+        <router-view
+          :documents="documentsSubset"
+          :key="this.$route.params.folderId"> <!-- To differentiate components from each other, so that <transition> can animate between them -->
+        </router-view>
+      </transition>
+
     </div>
-    <transition name="slideFinderWindow">
-      <router-view :projectFolders="projectFolders"></router-view>
-    </transition>
+
   </div>
 </template>
 
 <script>
   export default {
-    props: {
-      loading: { type: Boolean, default: false },
-      headerTitle: { type: String, default: 'Project' },
-      projectFolders: { type: Array }
-    },
+    name: "finder-route",
     data() {
       return {
         backActive: false
       }
     },
+    computed: {
+      documentsSubset() { return this.$store.getters.documentsSubset }
+    },
     created() {
-      this.checkForRouteParamsToActivateFinderBackButton()
+      this.routeInitAndWatchCalls()
     },
     watch: {
-      '$route': 'checkForRouteParamsToActivateFinderBackButton'
+      '$route': 'routeInitAndWatchCalls'
     },
     methods: {
-      goBack() {
-        this.$router.go(-1)
+      routeInitAndWatchCalls() {
+        this.setDocumentsSubset()
+        this.checkForRouteParamsToActivateFinderBackButton()
       },
-      checkForRouteParamsToActivateFinderBackButton() {
-        if ( this.$route.params.folderId || this.$route.params.itemId ) {
-          this.backActive = true
-        } else {
-          this.backActive = false
-        }
+      setDocumentsSubset() { this.$store.commit('SET_DOCUMENTS_SUBSET', this.$route.params.folderId) },
+      goBack() { this.$router.go(-1) },
+      checkForRouteParamsToActivateFinderBackButton() { // TODO: When you go directly to a route with eg. folderId the back button becomes visible (it shouldn't)
+        if ( this.$route.params.folderId || this.$route.params.itemId ) { this.backActive = true } else { this.backActive = false }
       }
     }
   }
@@ -55,6 +63,14 @@
 
   @import '~styles/vars';
 
+  .finderRoute {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
   .finder {
     position: relative;
     z-index: 1;
@@ -63,7 +79,6 @@
     background: $color-brandLight;
     border-radius: $borderRadius;
     animation: fadeIn 200ms ease-out, pop 400ms $animationBezier;
-    overflow: hidden;
 
     &_header {
       position: relative;
@@ -127,19 +142,16 @@
     }
   }
 
-  .slideFinderWindow-enter {}
-  .slideFinderWindow-enter-active { animation: slideIn 250ms $animationBezier forwards; }
-  .slideFinderWindow-leave {}
-  .slideFinderWindow-leave-active { animation: fadeOut 150ms $animationBezier forwards; }
-
-  @keyframes slideIn {
-  	0% 		{ transform: translateX(200px); opacity: 0; }
-  	100% 	{ transform: translateX(0px); opacity: 1; }
+  .slideFinderWindow-enter {
+    opacity: 0;
+    transform: translateX(20px);
   }
-
-  @keyframes fadeOut {
-  	0% 		{ opacity: 1; }
-  	100% 	{ opacity: 0; }
+  .slideFinderWindow-enter-active { transition: all 300ms 200ms ease-out; }
+  .slideFinderWindow-leave {}
+  .slideFinderWindow-leave-active {
+    transition: all 150ms ease-out;
+    opacity: 0;
+    transform: translateX(-20px);
   }
 
 </style>

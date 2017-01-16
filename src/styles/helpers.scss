@@ -85,8 +85,14 @@ $positions: '-top' '-right' '-bottom' '-left' ''; // One left blank for the clea
 	&-white 				{ background-color: #fff; }
 }
 
+.width {
+	&-full {
+		&-percent 	{ width: 100%; }}}
+
 .height 	{
-	&-full 	{ height: 100vh; }}
+	&-full {
+		&-percent 	{ height: 100%; }
+		&-viewport 	{ height: 100vh; }}}
 
 .minHeight {
 	&-full 	{ min-height: 100vh; }}

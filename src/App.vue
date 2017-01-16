@@ -8,9 +8,11 @@
 <script>
   import home from 'routes/home'
   export default {
+    name: 'App',
     components: { home },
     created() {
       this.$store.dispatch('initProjects')
+      this.$store.dispatch('assignParentFolderIdToChild') // Assigning ids from parent folder objects to child folder/item so they can be used to build url
     }
   }
 </script>
